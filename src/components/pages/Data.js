@@ -1,5 +1,5 @@
 // Component imports
-import Comp from "../Comp.js";
+import Comp from "../Menu.js";
 
 // antd imports
 import { useNavigate } from "react-router-dom";
