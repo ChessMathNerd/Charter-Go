@@ -10,7 +10,7 @@ function Home() {
     
     const newPage = () => {
         console.log('text');
-        navigate('/data', {name: 'Peter', age: 20, lastName: 'Morris'})
+        navigate('/deployment', {name: 'Peter', age: 20, lastName: 'Morris'})
     }
 
     return (

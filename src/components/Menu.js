@@ -3,20 +3,20 @@ import { useNavigate } from "react-router-dom";
 
 import styled from 'styled-components';
 
-function Comp() {
+function Menu() {
 
     const navigate = useNavigate();
     
     const toDeploy = () => {
-        navigate('/data/deployment');
+        navigate('/deployment');
     }
 
     const toBurnDown = () => {
-        navigate('/data/burn-down');
+        navigate('/burn-down');
     }
 
     const toBurnUp = () => {
-        navigate('/data/burn-up');
+        navigate('/burn-up');
     }
 
     const backToHome = () => {
@@ -35,7 +35,7 @@ function Comp() {
     )
 }
 
-export default Comp;
+export default Menu;
 
 const F1 = styled.div`
     height: 70px;
