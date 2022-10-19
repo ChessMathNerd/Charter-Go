@@ -24,3 +24,19 @@ function App() {
 }
 
 export default App;
+
+//      Analytics
+// Deployment Frequency
+// Burn down
+//   Be able to view multiple sprints at one time in a table view
+// Burn up
+//   Be able to view multiple sprints at one time in a table view
+// Code velocity
+// User velocity
+// Cycle time
+// Aging charts
+// Critical path
+//      Filter
+// Application
+// User
+// Date range
