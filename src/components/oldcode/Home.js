@@ -19,13 +19,12 @@ function Home() {
             <F2><h3>
                 Enter the project name, user, and date range. 
                 If you leave a field blank, everything will be selected. 
-                A project name is required.
             </h3></F2>
             
             <F2>
                 <Form name="basic" labelCol={{ span: 8 }} labelAlign="left"
                     wrapperCol={{ span: 16 }} initialValues={{ remember: true }} autoComplete="off">                        <Form.Item
-                        label="Project name (required)"
+                        label="Project name"
                         name="projectName"
                         rules={[{ required: true, message: "Please input a project name"}]}>  
                         <Input />
