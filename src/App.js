@@ -33,6 +33,7 @@ const App = () => {
   const [aging_charts_data, set_aging_charts_data] = React.useState({});
   const [burn_data, set_burn_data] = React.useState({});
   const [velocity_data, set_velocity_data] = React.useState({});
+  const [project_data, set_project_data] = React.useState({});
 
   // Theses functions each display one component and hide all the others by modifying 
   // the visibility variables for each component
@@ -63,11 +64,24 @@ const App = () => {
     set_show_burn_charts(0);
     set_show_cycle_time(0);
   }
+
+  const getProjList = async () => {
+    await axios.get(
+      'http://localhost:3001/proj_data'
+    ).then(res=>{
+      set_project_data(res.data);
+    })
+    .catch (err=> {
+      console.log(err);
+    })
+    
+  };
  
   // the fetch data component is called whenever the "call backend" button is pressed
   const getData = async () => {
+    await getProjList();
     await axios.get(
-      'http://localhost:3001/testEndpoint'
+      'http://localhost:3001/data'
     ).then(res=>{
 
       set_aging_charts_data(res.data.testingData);
@@ -102,19 +116,19 @@ const App = () => {
 
       <div> {/* Cycle time table piece */}
         {(show_cycle_time===1 && is_data===1) ? <div>
-          <CycleTime data = {cycle_time_data} />
+          <CycleTime display = {cycle_time_data} show = "true" projects = {project_data}/>
         </div> : (show_cycle_time===1 ? "You need to enter a search first!" : "")}
       </div>
 
       <div> {/* Burnup and burndown charts piece */}
         {(show_burn_charts===1 && is_data===1) ? <div>
-          <Burn data = {burn_data} />
+          <Burn display = {burn_data} show = "true"/>
         </div> : (show_burn_charts===1 ? "You need to enter a search first!" : "")}
       </div>
 
       <div> {/* User and code velocity piece */}
         {(show_velocity_tables===1 && is_data===1) ? <div>
-          <Velocity data = {velocity_data} />
+          <Velocity display = {velocity_data} show = "true"/>
         </div> : (show_velocity_tables===1 ? "You need to enter a search first!" : "")}
       </div>
     </RootFormat>
