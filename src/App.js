@@ -109,25 +109,25 @@ const App = () => {
       <div> {/* Aging charts piece */}
         {(show_aging_charts===1 && is_data===1) ? <div>
           <AgingCharts display = { aging_charts_data } show = "true" projects = {project_data}/>
-        </div> : (show_aging_charts===1 ? <h2>Waiting for data from zube</h2> : "")}
+        </div> : (show_aging_charts===1 ? <h2>Waiting for data from zube... </h2> : "")}
       </div>
 
       <div> {/* Cycle time table piece */}
         {(show_cycle_time===1 && is_data===1) ? <div>
           <CycleTime display = {cycle_time_data} show = "true" projects = {project_data}/>
-        </div> : (show_cycle_time===1 ? <h2>Waiting for data from zube</h2> : "")}
+        </div> : (show_cycle_time===1 ? <h2>Waiting for data from zube...</h2> : "")}
       </div>
 
       <div> {/* Burnup and burndown charts piece */}
         {(show_burn_charts===1 && is_data===1) ? <div>
           <Burn display = {burn_data} show = "true"/>
-        </div> : (show_burn_charts===1 ? <h2>Waiting for data from zube</h2> : "")}
+        </div> : (show_burn_charts===1 ? <h2>Waiting for data from zube...</h2> : "")}
       </div>
 
       <div> {/* User and code velocity piece */}
         {(show_velocity_tables===1 && is_data===1) ? <div>
           <Velocity display = {velocity_data} show = "true"/>
-        </div> : (show_velocity_tables===1 ? <h2>Waiting for data from zube</h2> : "")}
+        </div> : (show_velocity_tables===1 ? <h2>Waiting for data from zube...</h2> : "")}
       </div>
     </RootFormat>
   );
