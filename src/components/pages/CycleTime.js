@@ -1,13 +1,14 @@
 
 import React, { useState, useEffect } from 'react';
 import { Column } from '@ant-design/plots';
-import { Divider, Select } from 'antd';
+import { Divider, Select, Button } from 'antd';
 
 const Burn = (props) => {
 
     const [options, setOptions] = useState([]);
     const [show, setShow] = useState("false");
     const [displayable, setDisplayable] = useState([]);
+    const [search, setSearch] = useState(0);
 
     useEffect(() => {
         setDisplayable(props.display);
@@ -40,14 +41,17 @@ const Burn = (props) => {
         
     }
 
-    // onChange for the label change method property
     return (
         <div>
-            <Select
-                style={{ width: 120 }} 
-                options={options}
-                onChange={filter}
-            />
+            <div>
+                <h2>Filter your data</h2>
+                <Select
+                    style={{ width: 120 }} 
+                    defaultValue="Select project"
+                    options={options}
+                    onChange={filter}
+                />
+            </div>
             <Divider /><h2>Cycle time by sprint: The average amount of time from card creation to completion</h2><Divider />
             {/* {props.show==="true" ? 
             <div>

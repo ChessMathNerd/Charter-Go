@@ -16,7 +16,7 @@ const Velocity = (props) => {
             <div>
                 <Line data = { props.display } />
             </div> : "Nothing to display"} */}
-            <Divider /><h2>Velocity by Sprint: Number of user story points completed</h2><Divider />
+            <h2>Velocity by Sprint: Number of user story points completed</h2><Divider />
             {show==="true" ? 
             <div>
                 <Column 

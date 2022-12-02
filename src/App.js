@@ -1,9 +1,3 @@
-// Antiquated imports
-// import Burndown from './components/pages/Burndown';
-// import Burnup from './components/pages/Burnup';
-// import Home from './components/pages/Home';
-// import { Route, Routes } from 'react-router-dom';
-
 // Gotta have css!
 import './App.css';
 
@@ -15,11 +9,13 @@ import Burn from "./components/pages/Burn.js";
 import CycleTime from "./components/pages/CycleTime.js";
 
 // lib imports
-import { Button } from 'antd';
+import { Button, Divider } from 'antd';
 import styled from 'styled-components';
 import axios from 'axios';
 
 const App = () => {
+
+  const buttoncss = {height: 50, width: 150};
 
   // visibility useState variables. They control what gets displayed and when
   const [show_cycle_time, set_show_cycle_time] = React.useState(0);
@@ -77,14 +73,14 @@ const App = () => {
     
   };
  
-  // the fetch data component is called whenever the "call backend" button is pressed
   const getData = async () => {
+    set_is_data(0);
     await getProjList();
     await axios.get(
       'http://localhost:3001/data'
     ).then(res=>{
 
-      set_aging_charts_data(res.data.testingData);
+      set_aging_charts_data(res.data.agingcharts);
       set_burn_data(res.data.burnupburndown);
       set_cycle_time_data(res.data.cycletime);
       set_velocity_data(res.data.velocity);
@@ -97,60 +93,43 @@ const App = () => {
     show_aging();
   };
 
-  // the general html return statement
   return (
     <RootFormat>
-      <div>
-        <Button type="primary" onClick={getData}>Call Backend</Button>
-      </div>
-      <Button type="primary" onClick={show_aging}>Aging Charts</Button>
-      <Button type="primary" onClick={show_cycle}>Cycle Times</Button>
-      <Button type="primary" onClick={show_burn}>Burnup/Burndown</Button>
-      <Button type="primary" onClick={show_velocity}>Code Velocity</Button>
+      <Header>
+        <C_Format_1>
+          <Button type="primary" onClick={show_aging} style={buttoncss}>Aging Charts</Button>
+          <Button type="primary" onClick={show_cycle} style={buttoncss}>Cycle Times</Button>
+          <Button type="primary" onClick={show_burn} style={buttoncss}>Burnup/Burndown</Button>
+          <Button type="primary" onClick={show_velocity} style={buttoncss}>Code Velocity</Button>
+        </C_Format_1>
+        <Button type="primary" onClick={getData} style={buttoncss}>Get/Refresh Data</Button>
+      </Header>
+      <Divider />
 
       <div> {/* Aging charts piece */}
         {(show_aging_charts===1 && is_data===1) ? <div>
-          <AgingCharts display = { aging_charts_data } show = "true"/>
-        </div> : (show_aging_charts===1 ? "You need to enter a search first!" : "")}
+          <AgingCharts display = { aging_charts_data } show = "true" projects = {project_data}/>
+        </div> : (show_aging_charts===1 ? <h2>Waiting for data from zube</h2> : "")}
       </div>
 
       <div> {/* Cycle time table piece */}
         {(show_cycle_time===1 && is_data===1) ? <div>
           <CycleTime display = {cycle_time_data} show = "true" projects = {project_data}/>
-        </div> : (show_cycle_time===1 ? "You need to enter a search first!" : "")}
+        </div> : (show_cycle_time===1 ? <h2>Waiting for data from zube</h2> : "")}
       </div>
 
       <div> {/* Burnup and burndown charts piece */}
         {(show_burn_charts===1 && is_data===1) ? <div>
           <Burn display = {burn_data} show = "true"/>
-        </div> : (show_burn_charts===1 ? "You need to enter a search first!" : "")}
+        </div> : (show_burn_charts===1 ? <h2>Waiting for data from zube</h2> : "")}
       </div>
 
       <div> {/* User and code velocity piece */}
         {(show_velocity_tables===1 && is_data===1) ? <div>
           <Velocity display = {velocity_data} show = "true"/>
-        </div> : (show_velocity_tables===1 ? "You need to enter a search first!" : "")}
+        </div> : (show_velocity_tables===1 ? <h2>Waiting for data from zube</h2> : "")}
       </div>
     </RootFormat>
-
-    // For the routing system. I might not use it
-    // <div className = "App">
-    //  <Routes>
-    //     {/* Route for testing backend APIs */}
-    //     {/* <Route path="/" element={
-    //       <div className="App">
-    //         <header className="App-header">
-    //           <p>{!data ? "Loading..." : data}</p>
-    //         </header>
-    //       </div>
-    //     } /> */}
-    //     <Route path="/" element={<Home />} />
-    //     <Route path="/deployment" element={<Deployment />} />
-    //     <Route path="/burn-down" element={<Burndown />} />
-    //     <Route path="/burn-up" element={<Burnup />} />
-    //   </Routes>
-    // </div>
-    
   );
 }
 
@@ -158,6 +137,17 @@ export default App;
 
 const RootFormat = styled.div`
   padding: 10px 10px;
+`
+
+const Header = styled.div`
+  display:flex;
+  justify-content: space-between;
+`
+
+const C_Format_1 = styled.div`
+  min-width: 630px;
+  display: flex;
+  justify-content:space-between;
 `
 
 

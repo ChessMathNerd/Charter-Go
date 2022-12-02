@@ -13,7 +13,7 @@ const Burn = (props) => {
 
     return (
         <div>
-            <Divider /><h2>Burn up charts by sprint. Select a sprint name to see the chart for that sprint</h2><Divider />
+            <h2>Burn up charts by sprint. Select a sprint name to see the chart for that sprint</h2><Divider />
             {/* {props.show==="true" ? 
             <div>
                 <Line data = { props.display } />
